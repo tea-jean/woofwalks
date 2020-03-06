@@ -15,7 +15,7 @@
   <%= @service.user.email %>
 </p>
 
-<% if @photo.user == current_user %>
+<% if @service.user == current_user %>
   <%= link_to 'Edit', edit_service_path(@service) %> |
 <% end %>
 
