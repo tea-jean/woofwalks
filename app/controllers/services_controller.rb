@@ -1,5 +1,7 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_owner, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /services
   # GET /services.json
@@ -66,6 +68,15 @@ class ServicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_service
       @service = Service.find(params[:id])
+    end
+
+    def authorize_owner
+      return true if @photo.user == current_user
+
+      flash[:notice] = "You are not permitted to edit this service."
+      redirect_to "/"
+
+      return false
     end
 
     # Only allow a list of trusted parameters through.
