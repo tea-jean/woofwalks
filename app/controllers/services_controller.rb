@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_owner, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
   before_action :find_service, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+ 
 
   # GET /services
   # GET /services.json
@@ -28,7 +28,7 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-    @service.user.walker = current_user
+    @service.user.walker_id = current_user.id
 
     respond_to do |format|
       if @service.save
@@ -66,13 +66,9 @@ class ServicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      @service = Service.find(params[:id])
-    end
 
-    def authorize_owner
-      return true if @service.walker == current_user
+    def authorize_user!
+      return true if @service.walker.id == current_user.id
 
       flash[:notice] = "You are not permitted to alter this service."
       redirect_to "/"
