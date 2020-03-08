@@ -2,6 +2,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   before_action :authorize_owner, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_service, only: [:show, :edit, :update, :destroy]
 
   # GET /services
   # GET /services.json
@@ -71,9 +72,9 @@ class ServicesController < ApplicationController
     end
 
     def authorize_owner
-      return true if @photo.user == current_user
+      return true if @service.walker == current_user
 
-      flash[:notice] = "You are not permitted to edit this service."
+      flash[:notice] = "You are not permitted to alter this service."
       redirect_to "/"
 
       return false
@@ -82,5 +83,9 @@ class ServicesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def service_params
       params.require(:service).permit(:title, :description)
+    end
+
+    def find_service
+      @service = Service.find(params[:id])
     end
 end

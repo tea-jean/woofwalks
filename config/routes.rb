@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "services#index"
+  root to: "services#index"
   resources :services
   devise_for :users
   get "walker/dashboard", to: "walker#dashboard"

@@ -1,21 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
+  <p>
   <strong>Title:</strong>
   <%= @service.title %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Description:</strong>
   <%= @service.description %>
-</p>
+  </p>
 
-<p>
+  <p>
   <strong>Walker:</strong>
-  <%= @service.user.email %>
-</p>
+  <%= @service.walker.walker_name %>
+  </p>
+</div>
 
-<% if @service.user == current_user %>
+<% if @service.walker == current_user %>
   <%= link_to 'Edit', edit_service_path(@service) %> |
 <% end %>
 
