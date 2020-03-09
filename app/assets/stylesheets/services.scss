@@ -1,3 +1,27 @@
 // Place all the styles related to the Services controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import 'bootstrap' ;
+
+.preview {
+    img {
+        max-width: 35%
+    }
+}
+
+.service-container {
+    @extend .col-md-3;
+    @extend .col-12;
+}
+
+.service {
+    @extend .card;
+    @extend .mb-5;
+    border-width: 3px;
+}
+
+img {
+    @extend .img-fluid;
+    @extend .card-img-top;
+}

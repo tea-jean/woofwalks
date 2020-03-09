@@ -2,33 +2,27 @@
 
 <h1>Woof Walks</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @services.each do |service| %>
-      <tr>
-        <td><%= service.title %></td>
-        <td><%= service.description %></td>
-        <td><%= link_to 'Show', service %></td>
+<div class='row'>
+  <% @services.each do |service| %>
+    <div>
+      <div class="card-body">
+        <%= image_tag service.picture if service.picture.attached? %>
+        <div class="card-text text-center"> 
+        <%= service.title %><br>
+        <%= service.description %>
+        <%= link_to 'Show', service %>
           <% if user_signed_in? && service.walker.id == current_user.walker.id %>
-          
-          <td><%= link_to 'Edit', edit_service_path(service) %></td>
-          <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to 'Edit', edit_service_path(service) %>
+          <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </div>
+    </div> 
+    </div>
+  <% end %>
+</div>
 
 <br>
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.is_walker == true %>
 <%= link_to 'New Service', new_service_path %>
 <% end %>

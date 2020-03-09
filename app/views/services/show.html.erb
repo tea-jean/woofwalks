@@ -7,18 +7,22 @@
   </p>
 
   <p>
+  <strong>Walker:</strong>
+  <%= @service.walker.walker_name %>
+  </p>
+
+  <p>
   <strong>Description:</strong>
   <%= @service.description %>
   </p>
 
-  <p>
-  <strong>Walker:</strong>
-  <%= @service.walker.walker_name %>
+  <p class="preview">
+  <%= image_tag @service.picture if @service.picture.attached? %>
   </p>
 </div>
 
-<% if @service.walker == current_user %>
+<% if @service.walker.id == current_user.id %>
   <%= link_to 'Edit', edit_service_path(@service) %> |
 <% end %>
 
-<%= link_to 'Back', services_path %>
+  <%= link_to 'Back', services_path %>

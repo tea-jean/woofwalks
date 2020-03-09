@@ -28,7 +28,7 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-    @service.user.walker_id = current_user.id
+    @service.walker_id = current_user.walker.id
 
     respond_to do |format|
       if @service.save
@@ -68,12 +68,10 @@ class ServicesController < ApplicationController
   private
 
     def authorize_user!
-      return true if @service.walker.id == current_user.id
-
+      return true if @service.walker.id == current_user.walker.id
+      return false
       flash[:notice] = "You are not permitted to alter this service."
       redirect_to "/"
-
-      return false
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,0 +1,19 @@
+.form {
+    //     @extend .form-horizontal;
+    
+        .field {
+            @extend .form-group, .row;
+        
+        label {
+            @extend .col-3;
+        }
+    
+        input [type=number], input[type=text] {
+            @extend .form-control;
+        }
+     
+    }
+    input[type=submit] {
+        @extend .btn, .btn-primary;
+    }
+    }
