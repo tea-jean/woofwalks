@@ -4,20 +4,20 @@
 
 <div class='row'>
   <% @services.each do |service| %>
-    <div>
-      <div class="card-body">
-        <%= image_tag service.picture if service.picture.attached? %>
-        <div class="card-text text-center"> 
-        <%= service.title %><br>
-        <%= service.description %>
-        <%= link_to 'Show', service %>
-          <% if user_signed_in? && service.walker.id == current_user.walker.id %>
-          <%= link_to 'Edit', edit_service_path(service) %>
-          <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
+      <div class="service-container">
+          <%= image_tag service.picture if service.picture.attached? %>
+          <div class="card-body">
+           <div class="card-text text-center"> 
+            <%= service.title %><br>
+            <%= service.description %>
+            <%= link_to 'Show', service %>
+            <% if user_signed_in? && service.walker.id == current_user.walker.try(:id) %>
+            <%= link_to 'Edit', edit_service_path(service) %>
+            <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            </div>
           </div>
-    </div> 
-    </div>
+      </div> 
   <% end %>
 </div>
 
