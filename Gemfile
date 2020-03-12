@@ -61,3 +61,5 @@ gem "devise", "~> 4.7"
 
 # Amazon Web Services - S3 for photo storage
 gem "aws-sdk-s3", "~> 1.60"
+
+gem 'jquery-rails'

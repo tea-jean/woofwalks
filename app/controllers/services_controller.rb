@@ -1,8 +1,7 @@
 class ServicesController < ApplicationController
   before_action :find_service, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
- 
+  before_action :authenticate_user!, except: [:index]
 
   # GET /services
   # GET /services.json
@@ -82,4 +81,5 @@ class ServicesController < ApplicationController
     def find_service
       @service = Service.find(params[:id])
     end
-end
+
+  end
