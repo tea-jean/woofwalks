@@ -4,6 +4,6 @@ class MoveWalkerToUser < ActiveRecord::Migration[6.0]
     drop_table :walkers
     add_column :users, :name, :string
     add_column :users, :biography, :string
-    add_reference :services, :user
+    # add_reference :services, :user
   end
 end
