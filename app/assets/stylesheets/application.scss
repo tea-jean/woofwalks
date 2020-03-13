@@ -11,9 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
  */
+@import 'variables'; 
 @import 'bootstrap';
+@import 'bootswatch';
 @import 'services';
 @import 'forms';
+
 
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
