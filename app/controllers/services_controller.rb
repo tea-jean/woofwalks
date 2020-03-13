@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
   before_action :find_service, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /services
   # GET /services.json
@@ -27,7 +27,7 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(service_params)
-    @service.walker_id = current_user.walker.id
+    @service.user_id = current_user.id
 
     respond_to do |format|
       if @service.save
@@ -67,7 +67,7 @@ class ServicesController < ApplicationController
   private
 
     def authorize_user!
-      return true if @service.walker.id == current_user.walker.id
+      return true if @service.user.id == current_user.id
       return false
       flash[:notice] = "You are not permitted to alter this service."
       redirect_to "/"

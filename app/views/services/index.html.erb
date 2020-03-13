@@ -13,7 +13,7 @@
   <div class="card-body">
     <h4 class="card-title"><%= service.title %></h4>
     <p class="card-text"><%= service.description %></p>
-      <% if user_signed_in? && service.walker.id == current_user.walker.try(:id) %>
+      <% if user_signed_in? && service.user_id == current_user.try(:id) %>
       <%= link_to 'Edit', edit_service_path(service) %>
       <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
